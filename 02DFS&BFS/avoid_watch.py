@@ -25,7 +25,6 @@ def dfs(x,y):
         return 1
     if graph[x][y]=='S':#감시 못 피함
         cannot=1
-        return 1
     return 0
 
 block=list(combinations(avail,3)) #벽 세 개 조합

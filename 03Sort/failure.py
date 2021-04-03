@@ -19,7 +19,7 @@ def solution(n,stages):
         failure.append([unclear[i]/reach[i],i+1])
     failure.sort(key=lambda x:x[0],reverse=True)
     answer=[i[1] for i in failure]
-    print(answer)
+    return answer
 solution(5,[2,1,2,6,2,4,3,3])
 solution(4, [4, 4, 4, 4, 4])
 
