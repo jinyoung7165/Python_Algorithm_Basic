@@ -1,5 +1,5 @@
 from collections import deque
-#LIFO
+#FIFO
 que=deque()
 
 que.append(5)

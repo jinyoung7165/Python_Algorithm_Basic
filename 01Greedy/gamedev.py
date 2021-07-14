@@ -3,7 +3,7 @@ n,m=map(int,input().split())
 x,y,direction=map(int,input().split()) #(a,b) 바라보는 방향 direction
 #- 0: 북쪽- 1: 동쪽- 2: 남쪽- 3: 서쪽
 visited=[[0]*m for _ in range(n)]
-visited[a][b]=1 #현재 좌표 방문 처리
+visited[x][y]=1 #현재 좌표 방문 처리
 
 mapp=[]#0은 육지, 1은 바다
 for _ in range(n):

@@ -1,4 +1,4 @@
-#FIFO
+#LIFO
 stack=[]
 stack.append(5)
 stack.append(2)
