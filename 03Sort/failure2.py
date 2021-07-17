@@ -8,7 +8,7 @@ def solution(n,stages):
             reach-=unclear #다음 스테이지에 도달한 사람 수는 전체 사용자에서 이전 스테이지를 클리어하지 못한 사람 수를 뺌
         else:#이 스테이지를 도달한 사람이 아무도 없으면
             failure[i]=0
-   return failure.sort(key=lambda x:failure[x],reverse=True)#딕셔너리의 value(실패율)을 기준으로 내림차순 정렬 후 키 값 반환
+    return failure.sort(key=lambda x:failure[x],reverse=True)#딕셔너리의 value(실패율)을 기준으로 내림차순 정렬 후 키 값 반환
 solution(5,[2,1,2,6,2,4,3,3])
 solution(4, [4, 4, 4, 4, 4])
 
