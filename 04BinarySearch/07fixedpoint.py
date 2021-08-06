@@ -3,16 +3,17 @@
 #고정점이 나오고 나서, 그 다음 원소가 고정점이 아니라면 그 후 고정점은 없다
 from bisect import bisect_right,bisect_left
 arr=list(map(int,input().split()))
-mid=(max(arr)+min(arr))/2
+mid=(max(arr)+min(arr))//2
 right_idx=bisect_right(arr,mid)
 left_idx=bisect_left(arr,mid)
 flag=False #고정점 발견하면 true
 while left_idx<right_idx:
     if(arr[left_idx]==left_idx):
-        print(left_idx)
+        print(left_idx)  #고정점 출력
         flag=True
-    if(flag==True and arr[left_idx]!=left_idx):break
+    if(flag==True and arr[left_idx]!=left_idx):break #더 이상 고정점 없음
     left_idx+=1
+
 if(flag==False or (left_idx==right_idx and flag==True)):
     while right_idx<len(arr):
         if(arr[right_idx]==right_idx):

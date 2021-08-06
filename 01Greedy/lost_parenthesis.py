@@ -9,5 +9,3 @@ for i in arr[1:]: #-앞 뒤의 식 배열
     for j in i.split('+'): #+로 연결된 숫자들 최종적으로 뺀다
         result-=int(j)
 print(result)
-
-

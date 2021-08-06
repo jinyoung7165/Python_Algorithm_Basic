@@ -13,16 +13,16 @@ planes=[] #각 비행기별 도킹가능한 최대 게이트 번호
 for _ in range(p): #i번째 비행기는 1<=g<=planes[i] 게이트에 도킹 가능
     planes.append(int(input()))
 
-def find(x):
-    if parent[x]==x:
+def find(x):#루트를 찾아가서 루트번호를 리턴
+    if parent[x]==x: 
         return x
     parent[x]=find(parent[x])
     return parent[x]
 
-for plane in planes:
+for plane in planes: #일단 최대한 큰 게이트(plane)에 도킹하는 게 좋다.
     docking=find(plane)
-    if docking==0:
+    if docking==0: #0은 최종 루트노드
         break
-    parent[docking]=parent[docking-1]
+    parent[docking]=parent[docking-1] #도킹 가능.앞 게이트와 union(숫자 작은 앞 게이트가 부모가 됨)
     answer+=1
 print(answer)

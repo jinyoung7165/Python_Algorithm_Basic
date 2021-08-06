@@ -8,7 +8,7 @@ arr=list(map(int,input().split()))#각 떡의 개별 높이
 start=0 #이진탐색 시작점
 end=max(arr) #이진탐색 끝점
 result=0
-while(start<end):
+while(start<=end):
     total=0#잘린 떡의 전체 양
     mid=(start+end)//2 #중간점은 절단기의 높이
     for x in arr:
