@@ -6,14 +6,14 @@ INF=int(1e9)
 n,m=map(int(input()).split()) #노드수,간선수
 start=int(input())#시작노드
 graph=[[] for i in range(n+1)] #각 노드 연결 정보
-#visited=[False]*(n+1) 방문처리표 사용x
+#visited=[False]*(n+1) 방문처리표 사용x.heapq사용하기 때문에 재방문할 일 없다
 distance=[INF]*(n+1) #최단거리 테이블
 for _ in range(m):#모든 간선 정보
     a,b,c=map(int,input().split())#출발,도착,비용
     graph[a].append((b,c))#a에서 b로 가는 비용이 c
 def dijkstra(start):
-    q=[] #큐.(최단경로,노드)저장
-    heapq.heappush(q,(0,start))#최단경로0,시작노드 큐에 삽입
+    q=[] #큐.(최단거리,노드)저장
+    heapq.heappush(q,(0,start))#최단거리0,시작노드 큐에 삽입
     distance[start]=0
     while q:#큐가 빌 때까지
         dist,now=heapq.heappop(q)#가장 최단경로,노드 꺼냄

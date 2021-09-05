@@ -16,4 +16,23 @@ def dijkstra(start):
         if distance[now]<dist:
             continue  #58분
         for i in graph[now]:
-            const=dist+i[1]
+            cost=dist+i[1]
+            if cost<distance[[i[0]]]:#현재노드 거쳐 더 짧아지면
+                distance[i[0]]=cost #갱신 후 후보로 넣을 거임
+                heapq.heappush(q,(cost,i[0]))#제일 cost작은 순으로 정렬
+n,m,start=map(int(input()).split()) #노드수,간선수
+graph=[[] for i in range(n+1)] #각 노드 연결 정보
+distance=[INF]*(n+1) #최단거리 테이블
+for _ in range(m):#모든 간선 정보
+    a,b,c=map(int,input().split())#출발,도착,비용
+    graph[a].append((b,c))#a에서 b로 가는 비용이 c
+dijkstra(start)
+
+count=0 #도달할 수 있는 노드 개수
+max_distance=0 #도달할 수 있는 노드 중, 가장 멀리있는 노드와의 최단거리
+for d in distance:
+    if d!=1e9: #도달 가능
+        count+=1
+        max_distance=max(max_distance,d)
+
+print(count-1,max_distance) #시작노드 제외
