@@ -2,7 +2,7 @@
 #각 무게를 가진 추들이 주어졌을 때, 해당 추들로 만들 수 없는 양의 정수 중 최솟값
 #추를 추가할 때마다 해당 추 무게만큼 측정가능범위의 시작,끝 달라짐
 #추를 추가한 새로운 범위와 이전 범위가 겹치지 않으면 측정할 수 없는 값이 생긴 것
-from sys import exc_info, stdin
+from sys import stdin
 input=stdin.readline
 n=int(input()) #추의 개수
 arr=list(map(int,input().split()))
