@@ -25,5 +25,3 @@ while (start<=end):
     else: #c개 이상의 공유기를 설치할 수 없는경우. 간격을 좁혀서 더 많이 설치하자
         end=mid-1#최대 간격을 감소
 print(result)
-
-
