@@ -2,43 +2,30 @@
 #사탕 m개 -> n명에게 분배. 각 사람의 요구에 비해 못 받는 개수의 제곱의 합을 최소로
 #요구의 합-m =부족한 양 -> 각 사람에게 분배해서 제곱의 합 최소화
 #최대한 부족한 양을 골고루 분배
-from sys import stdin
-input=stdin.readline
-m,n=map(int,input().split())  #사탕 수, 사람 수
-demand=[] #사람 별 요구
-min=0 #제곱의 합 최소
-for i in range(n):
-    demand.append(int(input()))
-lack=sum(demand)-m #총 부족한 양
-demand.sort(reverse=True) #요구량 많은 사람 순
+import sys
+input = sys.stdin.readline
+lst = []
+M, N = map(int,input().split())
+for i in range(N):
+    lst.append(int(input()))
+lst.sort()  #요구량이 작은 사람 먼저 분배
+give_me_a_candies = sum(lst) - M # 필요 캔디 - 가진 캔디 = 부족 캔디
+ans = 0
 
-if(lack<=n): #부족<=N명 => 제곱 합 최소=각 사람마다 부족 1씩 더함=부족 개수
-    min=lack
-else: #요구량 가장 많은 사람 것부터 빼는 게 중요. 부족한 양 고르게 분포해야 함
-    temp=[]
-    for i in demand:
-        if i==1:  #요구량이 1이면 안 주면 됨
-            min+=1
-            temp.append(demand.index(i)) #요구량이 1인 인덱스 저장
-            lack-=1
-            n-=1 #사람 수
-    for i in temp:
-        del demand[i]
-    for i in demand:
-        share=lack//n #몫
-        remain=lack%n #나머지
-        if(remain<1): #나눠 떨어지면
-            min+=n*(share**2) #모든 멤버들에게 똑같이 부족 배분
-            break
-        if(remain==1):
-            min+=((share+1)**2) #몫+나머지1
-            lack-=share+1
-            n-=1 #사람 수
-        if(remain>1):
-            min+=((share+1)**2) #일단 1만 주고 다른 친구들에게 나눠주거나, 자기가 모든 나머지 가져야할 수도 있음
-            lack-=share+1
-            n-=1 #사람 수
-print(min%(2**64))
+for i in range(N): #사람 별로 반복(가장 요구 작은 사람부터)
+    # 분노가 최소인 지점 => 각 사람들이 못 받은 캔디 개수가 같을 때
+    # vacant는 분노가 최소가 되게 하는 한 사람이 못 받은 캔디의 개수
+    vacant = give_me_a_candies // ( N - i ) #남은 사람들 수만큼 골고루 부족 분배
+
+    if lst[i] >= vacant: #요구량이 부족한 양보다 많으면
+        given = vacant #부족한 양 골고루 나눠줌
+        ans += given**2 #총 나눠준 사탕 수 누적
+    else:     # 필요로 한 사탕 개수가 vacant보다 작다면 요구량만큼만 줌
+        given = lst[i]
+        ans += given**2
+    give_me_a_candies -= given #남은 사탕 계산
+
+print(ans%(2**64))
 
                     
             
