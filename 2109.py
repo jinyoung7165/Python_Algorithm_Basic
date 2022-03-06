@@ -19,3 +19,27 @@ for i in range(n):
     lastday=d
 
 print(sum)
+
+'''
+import heapq
+N=int(input())
+lectures=[]
+
+for i in range(N):
+    lectures.append(list(map(int, input().split())))
+
+# 리스트 둘째 인자를 오름차순으로 먼저 정렬 후 첫째 인자를 내림차순으로 정렬
+# lectures.sort(key=lambda x: (x[1], -x[0])) 안해도됨
+tmp=[] 
+
+for q,d in lectures:
+    heapq.heappush(tmp, q)
+    print("push", tmp)
+    if (len(tmp)>d):
+        heapq.heappop(tmp)
+        print("***pop***", tmp)
+
+print(sum(tmp))
+    
+#===
+'''
