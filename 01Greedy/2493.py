@@ -6,7 +6,7 @@
 from sys import stdin
 input=stdin.readline
 n=int(input())
-tower=list(input().split())
+tower=list(map(int,input().split()))
 result=[0 for _ in range(n)]
 stack=[] #top의 인덱스를 저장
 #직전에 들어온 값과 현재 탑 비교(앞에서부터)
