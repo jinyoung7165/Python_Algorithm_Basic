@@ -6,6 +6,23 @@ from sys import stdin
 import heapq
 input=stdin.readline
 n=int(input())
+que,arr=[],[]
+for i in range(n):
+    arr.append(list(map(int,input().split())))
+    
+arr.sort(key= lambda x: (x[1], -x[0])) #날짜 오름차순, 돈 내림차순
+
+for p, d in arr:
+    heapq.heappush(que, p) #무작정 돈을 넣고, que길이를 봤을 때, d가 1일 때는 하나만 들어가야하고, 2일 때는 두 개가 들어가야 함
+    if(len(que)>d):
+        heapq.heappop(que)
+
+print(sum(que))
+''' last조건문이 틀렸는데 왠지는 모르겠다. 반례가 없다
+from sys import stdin
+import heapq
+input=stdin.readline
+n=int(input())
 que=[]
 for i in range(n):
     p,d=map(int,input().split())
@@ -19,6 +36,7 @@ for i in range(n):
     lastday=d
 
 print(sum)
+'''
 
 '''
 import heapq
