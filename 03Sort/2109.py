@@ -18,7 +18,10 @@ for p, d in arr:
         heapq.heappop(que)
 
 print(sum(que))
-''' last조건문이 틀렸는데 왠지는 모르겠다. 반례가 없다
+''' last조건문이 틀렸는데 
+d = 1 1 4 4
+p = 5 5 5 5 의 경우,
+d = 1 4 4가 최대가 되는데, d != last일 때로 하면 틀림
 from sys import stdin
 import heapq
 input=stdin.readline
@@ -36,28 +39,4 @@ for i in range(n):
     lastday=d
 
 print(sum)
-'''
-
-'''
-import heapq
-N=int(input())
-lectures=[]
-
-for i in range(N):
-    lectures.append(list(map(int, input().split())))
-
-# 리스트 둘째 인자를 오름차순으로 먼저 정렬 후 첫째 인자를 내림차순으로 정렬
-# lectures.sort(key=lambda x: (x[1], -x[0])) 안해도됨
-tmp=[] 
-
-for q,d in lectures:
-    heapq.heappush(tmp, q)
-    print("push", tmp)
-    if (len(tmp)>d):
-        heapq.heappop(tmp)
-        print("***pop***", tmp)
-
-print(sum(tmp))
-    
-#===
 '''
