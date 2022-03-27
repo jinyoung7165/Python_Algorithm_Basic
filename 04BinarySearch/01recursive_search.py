@@ -2,7 +2,7 @@ def binary_search(arr,target,start,end):
     if start>end:
         return None
     mid=(start+end)//2 #중간점
-    if arr[min]==target:#찾을 값이 중간점 위치에 있을 때
+    if arr[mid]==target:#찾을 값이 중간점 위치에 있을 때
         return mid #찾은 경우 중간점 인덱스 리턴
     elif arr[mid]>target:#중간점 값보다 찾을 값이 작을 때 왼쪽 확인
         return binary_search(arr,target,start,mid-1)
