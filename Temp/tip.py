@@ -33,3 +33,11 @@ result = collections.Counter(nums).most_common(k) #[(1, 3), (2, 2)]
 # *result: (1,3) (2,2)
 #list(zip(*result)): [(1,2), (3,2)] : zip+*의 힘.
 list(zip(*result))[0] # unpacking시 안에 들어있는 시퀀스의 인덱스순서를 묶어 언패킹 (1,2) (3,2) => 결론적으로 collections.counter의 키만 출력 가능
+
+a, *b = [1,2,3,4]
+#a: 1, b: [2,3,4]
+*c, d = [1,2,3,4]
+#c:[1,2,3], d:4
+
+date_info = {'year':'2022', 'month':'01', 'day': '7'}
+new_info = {**date_info, 'day': '14'} #date_info의 나머지 멤버들 가지면서, day는 수정 가능
