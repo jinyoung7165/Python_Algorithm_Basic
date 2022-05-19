@@ -5,6 +5,9 @@ n=3이고, 입력은 아래와 같이 들어올 때
 1 0 1
 0 0 1
 '''
+import collections
+
+
 graph = [list(map(int, input().split())) for _ in range(n)]
 
 #세로로 원소 하나씩 입력될 때
@@ -22,3 +25,11 @@ print(len(count))
 #각 원소 가로로 띄어서 프린트
 #1 2 3 4 5
 print(*count)
+
+nums = [1,1,1,2,2,3]
+k=2
+#nums의 원소 중 k개 이상 나타나는 원소들만 출력
+result = collections.Counter(nums).most_common(k) #[(1, 3), (2, 2)]
+# *result: (1,3) (2,2)
+#list(zip(*result)): [(1,2), (3,2)] : zip+*의 힘.
+list(zip(*result))[0] # unpacking시 안에 들어있는 시퀀스의 인덱스순서를 묶어 언패킹 (1,2) (3,2) => 결론적으로 collections.counter의 키만 출력 가능
