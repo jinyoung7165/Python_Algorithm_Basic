@@ -41,3 +41,6 @@ a, *b = [1,2,3,4]
 
 date_info = {'year':'2022', 'month':'01', 'day': '7'}
 new_info = {**date_info, 'day': '14'} #date_info의 나머지 멤버들 가지면서, day는 수정 가능
+
+sum(nums[::2]) #짝수 번째 값만 더함 0,2,4,... 
+sum(s in J for s in S) #S의 원소들에 대해, J에 속하면 true -> true 개수의 합
