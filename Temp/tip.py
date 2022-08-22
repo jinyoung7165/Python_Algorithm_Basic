@@ -44,3 +44,6 @@ new_info = {**date_info, 'day': '14'} #date_info의 나머지 멤버들 가지�
 
 sum(nums[::2]) #짝수 번째 값만 더함 0,2,4,... 
 sum(s in J for s in S) #S의 원소들에 대해, J에 속하면 true -> true 개수의 합
+
+for i in list(graph): #defaultdict key를 통한 반복 시 반복할 때마다 변함 ->list로 해결
+        pass
