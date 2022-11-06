@@ -7,7 +7,7 @@
 #전체 기름 양보다 전체 비용이 크면 순회 불가능-출발점 유일 조건 실패. False
 #어차피 가능한 출발지점은 하나이기 때문에 안되는 지점을 모두 빼면 남는 것이 정답이 됨 O(n)
 def canComplete(gas, cost):
-    if sum(gas) < sum(cost): return False
+    if sum(gas) < sum(cost): return -1
     
     start, fuel = 0, 0
     for i in range(len(gas)):
