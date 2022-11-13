@@ -47,3 +47,8 @@ sum(s in J for s in S) #S의 원소들에 대해, J에 속하면 true -> true �
 
 for i in list(graph): #defaultdict key를 통한 반복 시 반복할 때마다 변함 ->list로 해결
         pass
+
+bin(2796202) #숫자-> 이진수 문자열
+'0b1010101010101010101010'
+str.zfill(5) #5자릿수 문자열 맞추기 위해 왼쪽에 '0'삽입
+str.replace('1','#')
