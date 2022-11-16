@@ -1,34 +1,42 @@
 #추석 트래픽
-time_table = dict()
-
-def duplicated(second):
-    if second not in time_table.keys():
-        return second
-    else:
-        return duplicated(second - 0.000001)
-
-def solution(lines):
-    for index, line in enumerate(lines):
-        date, time, duration = line.split() # 공백으로 분리
+#lines:["응답완료시간(date hh:mm:ss.sss) 처리시간(0.xxxs)"] :처리시간은 완료-시작+0.001초
+#lines는 응답완료시간 기준으로 오름차순 정렬돼있음
+#03:10:33.020 0.011s은 3시 10분 33.010초 33.020초까지 0.011초 동안 처리된 요청을 의미한다.
+#처리시간은 시작시간과 끝시간을 포함
+#슬라이딩 윈도우 + 투포인터
+#왜 밀리초 연산 필요한가> 다음 생에 알아보자.
+times = [] #(시작시간, 끝시간) 저장
+def my_solution(lines):
+    for line in lines:
+        _, time, duration = line.split()
         h, m, n = time.split(':') # : 시, 분, 초 분리
         end = int(h) * 60 * 60 + int(m) * 60 + float(n) # 초로 계산
         duration = float(duration[:-1]) # 뒤에 s 제거
-        start = end - duration + 0.001 - 0.9991
-        
-        time_table[duplicated(start)] = index
-        time_table[duplicated(end)] = index
-        
-    history = []
-    state = [0] * len(lines) # 트래픽이 동작 중인지 현재 상태 / 초기화 다 꺼져있다.
+        start = end - duration + 0.001
+        times.append([start, end])
     
-    for time in sorted(time_table.keys()):
-        index = time_table[time]
-        if state[index] == 0: # 트래픽이 시작이면 켠다.
-            state[index] = 1
-        elif state[index] == 1: # 트래픽이 종료시간이면 끈다.
-            state[index] = 0
-            
-        history.append(state.count(1)) # 현재 동작 중인 트래픽 개수를 센다.
-        #print(index, time, state, state.count(1))
-        
-    return max(history) 
+    answer = 0    
+    for time in times:
+        answer = max(answer, thrpt(time[0], time[0]+1.000), thrpt(time[1], time[1]+1.000))
+    return answer
+
+def thrpt(start, end):
+    cnt = 0
+    for time in times:
+        if time[0] < end and time[1] > start:
+            cnt += 1
+    return cnt
+
+#02.002~04.001, 05.001~07.000
+print(my_solution(["2016-09-15 01:00:04.001 2.0s", "2016-09-15 01:00:07.000 2s"])) #1
+#첫 번째 로그가 끝나는 시점과 두 번째 로그가 시작하는 시점의 구간인 01:00:04.001 ~ 01:00:05.001 딱 1초. 이미 첫번째 로그 끝나버림 1초 동안 최대 1개가 된다.
+
+#02.003~04.002, 05.001~07.000
+print(my_solution(["2016-09-15 01:00:04.002 2.0s", "2016-09-15 01:00:07.000 2s"])) #2
+#첫 번째 로그가 끝나는 시점과 두 번째 로그가 시작하는 시점의 구간인 01:00:04.002 ~ 01:00:05.001 1초 동안 최대 2개가 된다.
+
+print(my_solution(["2016-09-15 20:59:57.421 0.351s", "2016-09-15 20:59:58.233 1.181s",
+                "2016-09-15 20:59:58.299 0.8s", "2016-09-15 20:59:58.688 1.041s",
+                "2016-09-15 20:59:59.591 1.412s", "2016-09-15 21:00:00.464 1.466s",
+                "2016-09-15 21:00:00.741 1.581s", "2016-09-15 21:00:00.748 2.31s",
+                "2016-09-15 21:00:00.966 0.381s", "2016-09-15 21:00:02.066 2.62s"])) #7

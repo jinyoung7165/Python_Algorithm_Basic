@@ -52,3 +52,6 @@ bin(2796202) #숫자-> 이진수 문자열
 '0b1010101010101010101010'
 str.zfill(5) #5자릿수 문자열 맞추기 위해 왼쪽에 '0'삽입
 str.replace('1','#')
+
+#다중집합 교집합-> collections.Counter() & collections.Counter() 두 집합에 존재해야 함
+#그냥 집합 -> set() set() 끼리 intersection 연산자 존재
