@@ -7,6 +7,8 @@ n=3이고, 입력은 아래와 같이 들어올 때
 '''
 import collections
 
+#최댓값 이거 쓰자!!!!
+float('inf') #sys.maxsize 진짜 느림
 
 graph = [list(map(int, input().split())) for _ in range(n)]
 
