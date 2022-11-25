@@ -5,4 +5,4 @@ AND PRICE IN (SELECT MAX(PRICE) FROM FOOD_PRODUCT GROUP BY CATEGORY)
 GROUP BY CATEGORY
 ORDER BY MAX_PRICE DESC;
 
---- 그냥 max(price) 출력 왜 틀린 것일까
+--- 그냥 max(price) 출력 왜 틀린 것일까 -- group by의 기준이 아니기 때문
