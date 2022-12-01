@@ -5,7 +5,7 @@ n=3이고, 입력은 아래와 같이 들어올 때
 1 0 1
 0 0 1
 '''
-import collections
+import collections, re
 
 #최댓값 이거 쓰자!!!!
 float('inf') #sys.maxsize 진짜 느림
@@ -57,3 +57,9 @@ str.replace('1','#')
 
 #다중집합 교집합-> collections.Counter() & collections.Counter() 두 집합에 존재해야 함
 #그냥 집합 -> set() set() 끼리 intersection 연산자 존재
+
+re.sub('[^a-z0-9]','',s) #s문자열 중 문자, 숫자가 아닌 쓰레기 값 제거
+words = [word for word in re.sub('[^\w]', ' ', input) #^\w :단어문자가 아닌 것 공백으로
+.lower().split()
+        if word not in banned]
+    

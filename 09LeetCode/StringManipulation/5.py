@@ -9,7 +9,9 @@ def longest(input):
             left -= 1
             right += 1
         return input[left+1:right] #while문을 만족하는 범위의 부분문자열
-    
+        #while문 거친 후, 더 이상 left위치, right위치의 값이 같지 않음 -> 직전 left, right 범위 s리턴
+        #while문 거치지 않으면 self.expand(s,i,i+2)를 리턴함. s[i+1:i+2] = s[i+1]문자 1개
+        
     if len(input) < 2 or input == input[::-1]: #거꾸로해도 같은 문자열일 때(전체가 팰린드롬일 때)
         return input
     
