@@ -16,7 +16,7 @@ def dfs(sum, idx, path): #sum:만들어야 하는 남은 합
         return
     
     for i in range(idx, len(candidates)):
-        dfs(sum - candidates[i], i, path + candidates[i])
+        dfs(sum - candidates[i], i, path + [candidates[i]])
         
 dfs(target, 0, [])
 print(result)
