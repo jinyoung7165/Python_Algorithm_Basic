@@ -1,30 +1,22 @@
 #Path with Maximum Probability
-from heapq import heappush, heappop
+#start->end max prob값
+#양방향 -> 갔던 길 다시 못가게 visited 체크
 class Solution:
     def maxProbability(self, n: int, edges: List[List[int]], succProb: List[float], start: int, end: int) -> float:
-        graph = self.build_graph(edges, succProb)
-        seen = set()
-        
-        max_heap = [(-1, start)]
-        
-        while max_heap:
-            prob, cur = heappop(max_heap)
-			seen.add(cur)
-            if cur == end:
-                return -prob
-            for neigh, p in graph.get(cur, []):
-                if not neigh in seen:
-                    new_prob = -1 * abs(prob*p)
-                    heappush(max_heap, (new_prob, neigh))
-					
-		# No path from start to end
+        graph = defaultdict(list)
+        for i, node in enumerate(edges):
+            u, v = node[0], node[1]
+            graph[u].append((v, succProb[i]))
+            graph[v].append((u, succProb[i]))
+        que = [(-1, start)] #최대힙(-cost)기준 정렬
+        visited = set()
+        while que:
+            cost, cur = heapq.heappop(que)
+            if cur == end: return -cost
+            if cur in visited: continue
+            visited.add(cur)
+
+            for node, next_cost in graph[cur]:
+                if node not in visited:
+                    heapq.heappush(que, (-abs(cost*next_cost), node))
         return 0
-    
-    def build_graph(self, edges, succProb):
-        graph = {}
-        for i in range(len(edges)):
-            cur_edge = edges[i]
-            cur_prob = succProb[i]
-            graph.setdefault(cur_edge[0], []).append((cur_edge[1], cur_prob))
-            graph.setdefault(cur_edge[1], []).append((cur_edge[0], cur_prob))
-        return graph
