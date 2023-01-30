@@ -8,16 +8,21 @@ def invertTree(self, node):
         return node
     return None
 
-def invertTreeBFS(self, root):
-    queue = collections.deque([root])
-    
-    while queue:
-        node = queue.popleft()
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def invertTreeBFS(self, root: Optional[TreeNode]) -> Optional[TreeNode]:
+        que = collections.deque([root])
         
-        if node:
-            node.left, node.right = node.right, node.left
-            
-            queue.append(node.left)
-            queue.append(node.right)
-            
-    return root
+        while que:
+            node = que.popleft()
+            if node:
+                node.right, node.left = node.left, node.right
+                que.append(node.right) #다음 볼 서브트리 루트를 현재 노드의 right라고 생각
+                que.append(node.left) #다음 볼 서브트리 루트를 현재 노드의 left라고 생각
+        
+        return root

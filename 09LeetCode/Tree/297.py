@@ -1,41 +1,51 @@
-#Serilaze and Deserialize Binary Tree
+# Serialize and Deserialize Binary Tree
+# Definition for a binary tree node.
+# class TreeNode(object):
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
 #트리->배열->str. 자식이 없으면 #으로 채움. 0번째 원소는 #으로
-#BFS
-import collections
-
 class Codec:
-    def serialize(self, root):
-        queue = collections.deque([root])
-        result = ['#']
-        while queue:
-            node = queue.popleft()
-            if node:
-                queue.append(node.left)
-                queue.append(node.right)        
-                result.append(str(node.val)) #현재의 노드 삽입
-            else:
-                result.append('#')
-                
-        return ' '.join(result)
-    
-    def deserialize(self, data): #str->트리
-        nodes = data.split() #str->배열
+
+    def serialize(self, root): #tree->str
+        """Encodes a tree to a single string.
         
-        root = TreeNode(int(nodes[1])) #루트
-        queue = collections.deque([root])
-        index = 2 #다음 배열 원소 : level1의 맨왼쪽 자식
-        while queue:
-            node = queue.popleft()
-            if nodes[index] != '#': #왼쪽 자식 노드가 존재할 때
-                node.left = TreeNode(nodes[index]) #tree에 이어주고
-                queue.append(node.left)
-                
-            index += 1 #배열의 다음 원소(오른쪽에 노드 있는지 볼 것)
-            
-            if nodes[index] != '#': #오른쪽 자식 노드가 존재할 때
-                node.right = TreeNode(nodes[index]) #tree에 이어주고
-                queue.append(node.right) 
-                
-            index += 1
-            
+        :type root: TreeNode
+        :rtype: str
+        """
+        result = []
+        que = collections.deque([root])
+        while que:
+            node = que.popleft()
+            if node:
+                result.append(str(node.val))
+                que.append(node.left)
+                que.append(node.right)
+            else:
+                result.append("#") #빈 배열(root가 None)이어도 '#'
+
+        return ' '.join(result)
+
+    def deserialize(self, data): #str->tree
+        """Decodes your encoded data to tree.
+        
+        :type data: str
+        :rtype: TreeNode
+        """
+        node_list = data.split(' ')
+        if node_list[0] == '#': return None
+        root = TreeNode(int(node_list[0]))
+        que = collections.deque([root])
+        idx = 1 #루트 다음 원소의 인덱스 붙일 것
+        while que:
+            node = que.popleft() #현재 서브트리의 루트
+            if node_list[idx] != '#': #왼쪽 자식 존재
+                node.left = TreeNode(int(node_list[idx]))
+                que.append(node.left)
+            idx += 1 #다음 원소 볼 것
+            if node_list[idx] != '#': #오른쪽 자식 존재
+                node.right = TreeNode(int(node_list[idx]))
+                que.append(node.right)
+            idx += 1 #다음 원소 볼 것(serilaize시 자식 None이라도 양 옆 더함 + 중심노드None이면 실행x =>idx 초과 안 함)
         return root
