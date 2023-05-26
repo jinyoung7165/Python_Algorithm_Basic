@@ -54,7 +54,7 @@ class Solution:
             vertex = queue.popleft()
             result.append(vertex)
             for neighbor in graph[vertex]:
-                indegree[neighbor] -= 1
+                indegree[neighbor] -= 1 # neighbor를 듣기 위한 준비 vertex 하나 제거
                 if indegree[neighbor] == 0: #더이상 진입차수 없을 때 방문 가능
                     queue.append(neighbor)
 

@@ -62,4 +62,6 @@ re.sub('[^a-z0-9]','',s) #s문자열 중 문자, 숫자가 아닌 쓰레기 값 
 words = [word for word in re.sub('[^\w]', ' ', input) #^\w :단어문자가 아닌 것 공백으로
 .lower().split()
         if word not in banned]
-    
+
+mylist = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
+new_list = list(map(list, zip(*mylist))) #row, col 바꾸기
